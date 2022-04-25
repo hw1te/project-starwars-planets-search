@@ -22,7 +22,6 @@ const Table = () => {
 
   const planetFilter = data.filter((planet) => planet.name.toLowerCase()
     .includes(nameFilter.name));
-
   return (
     <div>
       <table>

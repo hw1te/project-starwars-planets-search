@@ -6,6 +6,9 @@ import MyContext from './MyContext';
 function Provider({ children }) {
   const [data, setData] = useState([]);
   const [nameFilter, setNameFilter] = useState({ name: '' });
+  const [column, setColumn] = useState('population');
+  const [comparison, setComparison] = useState('maior que');
+  const [number, setNumber] = useState(0);
 
   useEffect(() => {
     async function fetchPlanetsAPI() {
@@ -18,8 +21,39 @@ function Provider({ children }) {
     // setData(api.results);
   }, []);
 
+  const handleClick = () => {
+    if (comparison === 'maior que') {
+      const filter = data.filter((element) => element[column] > Number(number));
+      setData(filter);
+    }
+    if (comparison === 'menor que') {
+      const filter = data.filter((element) => element[column] < Number(number));
+      setData(filter);
+    }
+    if (comparison === 'igual a') {
+      const filter = data.filter((element) => element[column] === number);
+      setData(filter);
+    }
+    return data;
+  };
+
+  const contextValue = {
+    data,
+    nameFilter,
+    setNameFilter,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    number,
+    setNumber,
+    handleClick,
+  };
+
   return (
-    <MyContext.Provider value={ { data, nameFilter, setNameFilter } }>
+    <MyContext.Provider
+      value={ contextValue }
+    >
       {children}
     </MyContext.Provider>
   );
