@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [number, setNumber] = useState(0);
+  const [array, setArray] = useState([]);
 
   useEffect(() => {
     async function fetchPlanetsAPI() {
@@ -19,19 +20,25 @@ function Provider({ children }) {
     }
     fetchPlanetsAPI();
     // setData(api.results);
+    setArray([
+      'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
+    ]);
   }, []);
 
   const handleClick = () => {
     if (comparison === 'maior que') {
       const filter = data.filter((element) => element[column] > Number(number));
+      array.splice(array.indexOf(column), 1);
       setData(filter);
     }
     if (comparison === 'menor que') {
       const filter = data.filter((element) => element[column] < Number(number));
+      array.splice(array.indexOf(column), 1);
       setData(filter);
     }
     if (comparison === 'igual a') {
       const filter = data.filter((element) => element[column] === number);
+      array.splice(array.indexOf(column), 1);
       setData(filter);
     }
     return data;
@@ -48,6 +55,7 @@ function Provider({ children }) {
     number,
     setNumber,
     handleClick,
+    array,
   };
 
   return (

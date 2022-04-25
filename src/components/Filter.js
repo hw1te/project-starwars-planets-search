@@ -10,8 +10,10 @@ function Filter() {
     number,
     setNumber,
     handleClick,
+    array,
   } = useContext(MyContext);
-
+  // Parte do requisito 4, e requisito 5 feitos com base no código do João Elpidio
+  // https://github.com/tryber/sd-019-b-project-starwars-planets-search/pulls
   return (
     <div>
       <select
@@ -19,11 +21,11 @@ function Filter() {
         data-testid="column-filter"
         value={ column }
       >
-        <option>population</option>
-        <option>orbital_period</option>
-        <option>diameter</option>
-        <option>rotation_period</option>
-        <option>surface_water</option>
+        {
+          array.map((filter, index) => (
+            <option key={ index } value={ filter }>{ filter }</option>
+          ))
+        }
       </select>
       <select
         onChange={ ({ target }) => setComparison(target.value) }
