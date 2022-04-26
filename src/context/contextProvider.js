@@ -10,6 +10,7 @@ function Provider({ children }) {
   const [comparison, setComparison] = useState('maior que');
   const [number, setNumber] = useState(0);
   const [array, setArray] = useState([]);
+  // const [list, setList] = useState({});
 
   useEffect(() => {
     async function fetchPlanetsAPI() {
@@ -56,6 +57,8 @@ function Provider({ children }) {
     setNumber,
     handleClick,
     array,
+    // list,
+    // setList,
   };
 
   return (
