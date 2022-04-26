@@ -1,8 +1,8 @@
+th {
+  text-align: left;
+}
+
 table, th, td {
   border: 1px black solid;
   border-collapse: collapse;
-}
-
-th {
-  text-align: left;
 }
